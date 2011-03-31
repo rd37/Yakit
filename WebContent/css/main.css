@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+table {margin:auto;border-spacing:0px;}
+div {margin:auto;}
+html { height: 100% ;width:600px;}
+body { height: 100%; margin:auto; padding: 0px; text-align:center;width:600px;align:left;}
+
+a.signon {font-size:12px;color:green;}
+table.signon {font-size:10px;color:purple;}
+input.signon {font-size:8px;color:blue;text-align:left;width:80px;}
+button.signon {font-size:8px;color:green;text-align:center;width:85px;}
+div.topnav {font-size:14px ; text-align:left ; color:blue;align:left}
+div.mapspace {width:200px;height:200px;}
+div.gmap {width:200px;height:200px;left:10px;top:10px;position:absolute;} 
+
