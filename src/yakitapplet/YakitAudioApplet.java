@@ -28,7 +28,7 @@ public class YakitAudioApplet extends Applet{
 	 * Get Message Data Bytes at index in byte stream
 	 */
 	public byte[] getMicMessageBytes(int index){
-		if(sampledInputFromMIC.size()==0){
+		if(sampledInputFromMIC.size()==0&&outMsg==null){
 			return null;
 		}
 		if(outMsg==null){

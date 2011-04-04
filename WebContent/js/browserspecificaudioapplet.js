@@ -1,8 +1,5 @@
-var _app = navigator.appName;
-var audiotimerstarted=0;
-var audiotimer;
-var audiobytearray = [];
-var tmpbytearray;
+var send_audiotimerstarted=0;
+var send_audiotimer;
 
 function stopcollectaudio(){
 	document.getElementById("audioapplet").sendCommand("StopCollectAudio");
@@ -14,41 +11,46 @@ function collectaudio(){
 
 
 function audiomessengerstarttimer(){
-	if(audiotimerstarted==0){
-		audiotimerstarted=1;
-		audiomessengertimer();
+	if(send_audiotimerstarted==0){
+		send_audiotimerstarted=1;
+		send_audiomessengertimer();
 	}
 }
 
 function audiomessengerstoptimer(){
-	audiotimerstarted=0;
+	send_audiotimerstarted=0;
 }
 
-function audiomessengertimer(){
-	if(audiotimerstarted==1){
+function send_audiomessengertimer(){
+	if(send_audiotimerstarted==1){
 		/*
 		 * Retreive any audio clips then send back
 		 */
 		var outgoingclips = document.getElementById("audioapplet").getMicMessageCount();
-		alert("have "+outgoingclips+" outbound clip");
+		//alert("have "+outgoingclips+" outbound clip");
 		if(outgoingclips>0){
+			/*
+			 * If out going clip, then gather data into javascript byte array
+			 * and intiate call to audiomessengersend servlet
+			 */
 			var index=0;
-			tmpbytearray = document.getElementById("audioapplet").getMicMessageBytes(index);
-			while(tmpbytearray!=null){
-				audiobytearray.push(tmpbytearray);
+			var send_audiobytearray = [];
+			var send_tmpbytearray = document.getElementById("audioapplet").getMicMessageBytes(index);
+			while(send_tmpbytearray!=null){
+				send_audiobytearray.push(send_tmpbytearray);
 				index++;
-				tmpbytearray = document.getElementById("audioapplet").getMicMessageBytes(index);
+				send_tmpbytearray = document.getElementById("audioapplet").getMicMessageBytes(index);
 			}
-			alert("retrieved mic message, now relay it back");
-			audiobytearray.reverse();
-			tmpbytearray=audiobytearray.pop();
-			while(tmpbytearray){
-				document.getElementById("audioapplet").addAudioBytesForSpeaker(tmpbytearray);
-				tmpbytearray=audiobytearray.pop();
+			//alert("retrieved mic message, now relay it back ");
+			/*send_audiobytearray.reverse();
+			send_tmpbytearray=send_audiobytearray.pop();
+			while(send_tmpbytearray){
+				document.getElementById("audioapplet").addAudioBytesForSpeaker(send_tmpbytearray);
+				send_tmpbytearray=send_audiobytearray.pop();
 			}
-			document.getElementById("audioapplet").submitAudioMessageForSpeaker();
-			alert("message relayed back");
+			document.getElementById("audioapplet").submitAudioMessageForSpeaker();*/
+			//alert("message relayed back");
 		}
 	}
-    audiotimer = setTimeout("audiomessengertimer()",6000);
+    send_audiotimer = setTimeout("send_audiomessengertimer()",6000);
 }
