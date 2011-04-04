@@ -40,6 +40,7 @@ function audiomessengertimer(){
 				tmpbytearray = document.getElementById("audioapplet").getMicMessageBytes(index);
 			}
 			alert("retrieved mic message, now relay it back");
+			audiobytearray.reverse();
 			tmpbytearray=audiobytearray.pop();
 			while(tmpbytearray){
 				document.getElementById("audioapplet").addAudioBytesForSpeaker(tmpbytearray);

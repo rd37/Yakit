@@ -34,7 +34,10 @@ public class YakitAudioApplet extends Applet{
 		if(outMsg==null){
 			outMsg=sampledInputFromMIC.removeFirst();
 		}
-		return outMsg.getBytes(index);
+		byte[] ret= outMsg.getBytes(index);
+		if(ret==null)
+			outMsg=null;
+		return ret;
 	}
 	
 	/*
