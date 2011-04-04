@@ -126,9 +126,8 @@ function mainChanged(){
 			document.getElementById("map_canvas").style.visibility="visible";
 			gmapstarttimer();
 			textmessengerstarttimer();
-			//initapplet();
+			audiomessengerstarttimer();
 			if(userid==null){
-				//alert("Logging in as default user "+userid);
 				login(null,null,null,document.yakform.latitude.value,document.yakform.longitude.value,document.yakform.tx_radius.value);
 			}else{
 				document.getElementById("login_id").innerHTML=userid;
