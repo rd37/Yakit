@@ -17,6 +17,7 @@ public class EchoSound implements Runnable{
 	public void run() {
 		while(true){
 			try{
+				Thread.sleep(100);
 				int msgs = applet.getSpeakerCnt();
 				if(msgs>0){
 					AudioMessage am = applet.getMessageForSpeaker();

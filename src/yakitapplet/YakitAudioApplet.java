@@ -56,6 +56,7 @@ public class YakitAudioApplet extends Applet{
 	 */
 	public void addAudioMessageFromMic(AudioMessage am){
 		sampledInputFromMIC.add(am);
+		//this.outputForSpeaker.add(am);
 	}
 	
 	/*
