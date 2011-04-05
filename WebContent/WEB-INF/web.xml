@@ -61,13 +61,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AudioMessengerServlet</display-name>
-    <servlet-name>AudioMessengerServlet</servlet-name>
-    <servlet-class>yakitmessenging.AudioMessengerServlet</servlet-class>
+    <display-name>SendAudioMessengerServlet</display-name>
+    <servlet-name>SendAudioMessengerServlet</servlet-name>
+    <servlet-class>yakitmessenging.SendAudioMessengerServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AudioMessengerServlet</servlet-name>
-    <url-pattern>/AudioMessengerServlet</url-pattern>
+    <servlet-name>SendAudioMessengerServlet</servlet-name>
+    <url-pattern>/SendAudioMessengerServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

@@ -1,7 +1,11 @@
 package yakitmessenging;
 
+import java.util.LinkedList;
+
 public class AudioMessage extends Message {
 	private String fileLocation="";
+	LinkedList<byte[]> audioData=new LinkedList<byte[]>();
+	
 	public AudioMessage(int type) {
 		super(type);
 	}
@@ -11,5 +15,10 @@ public class AudioMessage extends Message {
 	public String getFileLocation() {
 		return fileLocation;
 	}
-
+	public void addBytes(byte[] data){
+		audioData.add(data);
+	}
+	public byte[] getBytes(int index){
+		return audioData.get(index);
+	}
 }
