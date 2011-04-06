@@ -114,7 +114,7 @@ public class TextMessengerServlet extends HttpServlet {
 		/*
 		 * Update my position
 		 */
-		System.out.println(queryString);
+		//System.out.println(queryString);
 		int userkey=dbtoicon.get(id);
 		String returnmessage="";
 		if(op.equals("sendmessage")){
@@ -156,7 +156,7 @@ public class TextMessengerServlet extends HttpServlet {
 		 *      4c. access MessageEngine and get text of each
 		 *      4d. send text back
 			 */
-			int ret[] =iconweb.getMessageKey("rigi-lab-03.cs.uvic.ca",userkey);
+			int ret[] =iconweb.getTextMessageKey("rigi-lab-03.cs.uvic.ca",userkey);
 			int countleft=ret[0];
 			int msgkey=ret[1];
 			TextMessage textMsg = (TextMessage) engine.getMessage(msgkey);

@@ -79,4 +79,14 @@
     <servlet-name>TextMessengerServlet</servlet-name>
     <url-pattern>/TextMessengerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RcvAudioMessengerServlet</display-name>
+    <servlet-name>RcvAudioMessengerServlet</servlet-name>
+    <servlet-class>yakitmessenging.RcvAudioMessengerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RcvAudioMessengerServlet</servlet-name>
+    <url-pattern>/RcvAudioMessengerServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

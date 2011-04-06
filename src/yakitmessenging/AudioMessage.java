@@ -19,6 +19,9 @@ public class AudioMessage extends Message {
 		audioData.add(data);
 	}
 	public byte[] getBytes(int index){
-		return audioData.get(index);
+		if(index<audioData.size())
+			return audioData.get(index);
+		else
+			return null;
 	}
 }

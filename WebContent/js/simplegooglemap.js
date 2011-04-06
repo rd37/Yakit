@@ -13,6 +13,7 @@ var covHttpReq;
 
 function initialize() {     
 	//alert("init map");
+	gmapselfupdater();textmessengertimer();send_audiomessengertimer();rcv_audiomessengertimer();
 	latlng = new google.maps.LatLng(maplat, maplng);     
 	mapOptions = {       zoom: 14,       center: latlng,       mapTypeId: google.maps.MapTypeId.ROADMAP     };     
 	map = new google.maps.Map(document.getElementById("map_canvas"),         mapOptions); 
@@ -22,7 +23,7 @@ function initialize() {
 	document.getElementById("map_canvas").style.display="none";
 	//alert("map hidden");
 	timerstarted=0;timerdeployed=0;
-	gmapselfupdater();textmessengertimer();
+	
 	//gmapselfupdater();textmessengertimer();intialize_audio();
 	mainpage_show('yak.html');
 }  

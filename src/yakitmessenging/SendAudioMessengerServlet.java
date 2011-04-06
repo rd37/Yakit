@@ -1,5 +1,6 @@
 package yakitmessenging;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -74,7 +75,7 @@ public class SendAudioMessengerServlet extends HttpServlet {
 		String coverres = iconweb.getCoverage("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey, iconserver.metersToDegree((new Double(rad)).doubleValue())  );
 		StringTokenizer st = new StringTokenizer(coverres);
 		int msgcount=0;
-		System.out.println("Now uupdate "+st.countTokens()+" users that audio message is in");
+		//System.out.println("Now uupdate "+st.countTokens()+" users that audio message is in");
 		while(st.hasMoreTokens()){
 			int key = (new Integer(st.nextToken()));
 			iconweb.addMessageKey("rigi-lab-03.cs.uvic.ca",key,(new Integer(msgkey)).intValue(),Message.AUDIO);
@@ -97,26 +98,32 @@ public class SendAudioMessengerServlet extends HttpServlet {
 		String msg = request.getParameter("logid");
 		String msg2 = request.getParameter("latit");
 		//queryString = queryString.replaceAll("%20", " ");
-		System.out.println("SendAudioMessengerServler::rcvd on POST "+queryString);
-		System.out.println("SendAudioMessengerServler::rcvd on POST "+msg+" "+msg2);
+		//System.out.println("SendAudioMessengerServler::rcvd on POST "+queryString);
+		//System.out.println("SendAudioMessengerServler::rcvd on POST "+msg+" "+msg2);
 
 		String state = request.getParameter("send_audiostate");
 		String audio_key = request.getParameter("audio_key");
-		System.out.println("state "+state+" audiokey "+audio_key);
+		//System.out.println("state "+state+" audiokey "+audio_key);
 		int key=0;
 		if(state!=null&&state.equals("2")){
-			System.out.println("SendAudioMessageServlet::create new audio message");
+			//System.out.println("SendAudioMessageServlet::create new audio message");
 			AudioMessage audioMsg = new AudioMessage(Message.AUDIO);
 			key = engine.addMessage(audioMsg);
 			response.getWriter().write( ""+key );  
 		}else if(state!=null&&state.equals("3")){
-			//System.out.println("SendAudioMessageServlet::add bytes to msg "+audio_key);
+			/*String msgString = request.getParameter("data_string");
+			System.out.println("RCvd "+msgString.length());
+			AudioMessage audioMSG = (AudioMessage) engine.getMessage((new Integer(audio_key)).intValue());
+	        audioMSG.addBytes(msgString.getBytes());*/
 			DataInputStream din = new DataInputStream(request.getInputStream());   
-			byte[] data = new byte[0];   
+			byte[] data = new byte[0];
 	        byte[] buffer = new byte[512];   
 	        int bytesRead;   
 	        while ((bytesRead = din.read(buffer)) > 0 ) {   
+	        	//System.out.println("Just read in "+bytesRead+" into buffer ");
+	        	//System.out.println(new String(buffer));
 	            // construct large enough array for all the data we now have   
+	        	//System.out.println("Read in "+bytesRead+" bytes");
 	            byte[] newData = new byte[data.length + bytesRead];   
 	            // copy data previously read   
 	            System.arraycopy(data, 0, newData, 0, data.length);   
@@ -125,12 +132,11 @@ public class SendAudioMessengerServlet extends HttpServlet {
 	            // discard the old array in favour of the new one   
 	            data = newData;   
 	        } 
-	        //System.out.println(" add data to msg "+audio_key+"data size "+data.length);
+	        
 	        AudioMessage audioMSG = (AudioMessage) engine.getMessage((new Integer(audio_key)).intValue());
 	        audioMSG.addBytes(data);
 		}else{
 			System.out.println("no state specifed, maybe data");
-			
 		}
 		
 		response.getWriter().close();

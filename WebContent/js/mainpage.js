@@ -135,6 +135,7 @@ function mainChanged(){
 		  }else{
 			  gmapstoptimer();
 			  textmessengerstarttimer();
+			  audiomessengerstoptimer();
 		  }
 	  }
 }
