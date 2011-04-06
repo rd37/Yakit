@@ -99,7 +99,7 @@ function rcvAudioMessageSubmitted(){
 			if(data=="?"){
 				//alert("audio data download complete playback audio");
 				document.getElementById("audioapplet").submitAudioMessageForSpeaker();
-				rcv_audiostate=0;
+				rcv_audiostate=0;rcv_audio_index=0;
 			}else{
 				var parseddata = getdata(data);
 				
@@ -256,7 +256,7 @@ function sendaudiobytes(index){
 			//alert("send bytes "+index+" but bytes are null");//+"&data="+send_bytearray
 		}
 		send_audioHttpReq.data=msg;
-		//alert("sending "+msgString);
+		//alert("sending audio ");
 		send_audioHttpReq.send(msg);
 	}
 }

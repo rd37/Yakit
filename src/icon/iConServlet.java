@@ -67,7 +67,7 @@ public class iConServlet extends HttpServlet {
 		if(iconserver==null){
 			//response.getWriter().write("iconserver is null");
 			this.getServletContext().setAttribute("iconserver", iconserver = iConServer.getInstance());
-			iconserver.intialize(765, 4);
+			iconserver.intialize(765, 6);
 			iconserver.setUrl("rigi-lab-03.cs.uvic.ca");
 		}else{
 			//response.getWriter().write("iconserver is avaiil");
