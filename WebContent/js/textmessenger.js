@@ -3,9 +3,10 @@ var msg2HttpReg;
 var texttimer;
 var buzy=0;
 
-function sendTextMessage() {     
-	var key = window.event.keyCode;      
-	if (key == 13) {         
+function sendTextMessage(event) {     
+	var Key = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+	//alert("key pressed iii "+Key);
+	if (Key == 13) {         
 		latitude = document.yakform.latitude.value;
 		longitude = document.yakform.longitude.value;
 		radius = document.yakform.tx_radius.value;

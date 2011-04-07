@@ -30,7 +30,7 @@
                            </select></td></tr><tr><td>Lat:<input type="text" name="latitude" value="48.463"/></td></tr>
                            <tr><td>Lng:<input type="text" name="longitude" value="-123.313" /></td></tr>
                            <tr><td><div id="mapholder" class="mapspace"></div></td></tr></table></td>
-		<td><table><tr><td>Text or <input type="button" value="push to YaK" onmousedown="collectaudio()" onmouseup="stopcollectaudio()" ></td></tr><tr><td><textarea name="textinput" rows="2" cols="15" onkeypress="sendTextMessage()"></textarea></td></tr><tr><td><textarea name="textoutput" rows="7" cols="15"></textarea></td></tr></table></td>
+		<td><table><tr><td>Text or <input type="button" value="push to YaK" onmousedown="collectaudio()" onmouseup="stopcollectaudio()" ></td></tr><tr><td><textarea name="textinput" rows="2" cols="15" onkeyup="sendTextMessage(event)"></textarea></td></tr><tr><td><textarea name="textoutput" rows="7" cols="15"></textarea></td></tr></table></td>
 	</tr>
 	</table>
 </td></tr>

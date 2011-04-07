@@ -121,7 +121,7 @@ public class YakitAudioApplet extends Applet{
 	}
 	
 	public void paint(Graphics g){
-		g.drawString(msg, 10, 10);
+		//g.drawString(msg, 10, 10);
 	}
 
 	private String getStringFrom(byte data){
