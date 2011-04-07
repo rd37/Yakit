@@ -3,10 +3,25 @@ var msg2HttpReg;
 var texttimer;
 var buzy=0;
 
-function sendTextMessage(event) {     
-	var Key = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
-	//alert("key pressed iii "+Key);
-	if (Key == 13) {         
+function sendchar(e) {  
+	//alert("key press");
+	var keynum;
+	var keychar;
+	if(e==null)
+		alert("e is null ???");
+	if(e.which) // IE
+	{
+	//alert("netscape");
+	keynum = e.which;
+	}
+	else if(window.event) // Netscape/Firefox/Opera
+	{
+	//alert("ie");
+	keynum = window.event.keyCode;
+	}
+	keychar = String.fromCharCode(keynum);
+    //alert("key pressed "+keychar+" keynum "+keynum);
+	if (keynum == 13) {         
 		latitude = document.yakform.latitude.value;
 		longitude = document.yakform.longitude.value;
 		radius = document.yakform.tx_radius.value;
@@ -91,7 +106,7 @@ function getMsgSubmitted(){
 	if(msg2HttpReq.readyState==4){
 		//alert(""+msgHttpReq.responseText);
 		var txt = document.yakform.textoutput.value;
-		if(msg2HttpReq.responseText!="")
+		if(msg2HttpReq.responseText!=null && msg2HttpReq.responseText!="")
 		document.yakform.textoutput.value=msg2HttpReq.responseText+"\n"+txt;
 		buzy=0;
 	}

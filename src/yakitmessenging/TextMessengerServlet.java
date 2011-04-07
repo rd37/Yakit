@@ -168,8 +168,10 @@ public class TextMessengerServlet extends HttpServlet {
 				returnmessage="";
 			}
 		}
-		
-		response.getWriter().write(returnmessage);
+		if(returnmessage!=null)
+			response.getWriter().write(returnmessage);
+		else
+			response.getWriter().write("");
 		response.getWriter().close();
 	}
 
