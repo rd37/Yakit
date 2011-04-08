@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import server.iConAddress;
 import server.iConServer;
 import tester.iConWeb;
+import yakitdb.YaKitDerbyDB;
+import yakitengine.UserUpdate;
 
 /**
  * Servlet implementation class iConServlet
@@ -87,6 +89,15 @@ public class iConServlet extends HttpServlet {
 			this.getServletContext().setAttribute("dbtoicon", dbtoicon = new HashMap<String,Integer>() );
 		}
 		
+		HashMap<String,Long> userusagetime = (HashMap<String, Long>) this.getServletContext().getAttribute("userusagetime");
+		if(dbtoicon==null){
+			this.getServletContext().setAttribute("userusagetime", userusagetime = new HashMap<String,Long>() );
+			UserUpdate userupdate = new UserUpdate(userusagetime,iconweb,dbtoicon,YaKitDerbyDB.getInstance());
+			Thread updateThread = new Thread(userupdate);
+			updateThread.start();
+		}
+		
+		
 		// TODO Auto-generated method stub
 		String queryString = request.getQueryString();
 		queryString = queryString.replaceAll("%20", " ");
@@ -97,6 +108,8 @@ public class iConServlet extends HttpServlet {
 		String rad = getRadius(queryString);
 		//String op = getOperation(queryString);
 		String address = request.getRemoteAddr();
+		
+		userusagetime.put(id, System.currentTimeMillis());
 		/*
 		 * Update my position
 		 */

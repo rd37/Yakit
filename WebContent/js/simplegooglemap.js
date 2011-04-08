@@ -35,11 +35,11 @@ function initialize() {
 			mousefirstlatlng=null;
 			latlng = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
 		   //alert(" now move cirlce");
-		   document.yakform.latitude.value=latlng.lat();
-		   latitude=latlng.lat();
+		   //document.yakform.latitude.value=latlng.lat();
+		   //latitude=latlng.lat();
 		   //maplat=latlng.lat();
-		   document.yakform.longitude.value=latlng.lng();
-		   longitude=latlng.lng();
+		   //document.yakform.longitude.value=latlng.lng();
+		   //longitude=latlng.lng();
 		   //maplng=latlng.lng();
 		   circle.setCenter(latlng);innercircle.setCenter(latlng);
 		}
@@ -67,11 +67,11 @@ function addHomeCircle(lat,long,rad,color){
 			   positionselected=0;
 			   latlng = new google.maps.LatLng(event.latLng.lat(),event.latLng.lng());
 			   //alert(" now move cirlce");
-			   document.yakform.latitude.value=latlng.lat();
-			   latitude=latlng.lat();
+			   //document.yakform.latitude.value=latlng.lat();
+			   //latitude=latlng.lat();
 			   //maplat=latlng.lat();
-			   document.yakform.longitude.value=latlng.lng();
-			   longitude=latlng.lng();
+			   //document.yakform.longitude.value=latlng.lng();
+			   //longitude=latlng.lng();
 			   //maplng=latlng.lng();
 			   circle.setCenter(latlng);innercircle.setCenter(latlng);
 		   }else{

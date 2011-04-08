@@ -86,6 +86,15 @@ public class LoginServlet extends HttpServlet {
 			this.getServletContext().setAttribute("dbtoicon", dbtoicon = new HashMap<String,Integer>() );
 		}
 		
+		HashMap<String,Long> userusagetime = (HashMap<String, Long>) this.getServletContext().getAttribute("userusagetime");
+		if(userusagetime==null){
+			this.getServletContext().setAttribute("userusagetime", userusagetime = new HashMap<String,Long>() );
+			UserUpdate userupdate = new UserUpdate(userusagetime,iconweb,dbtoicon,YaKitDerbyDB.getInstance());
+			Thread updateThread = new Thread(userupdate);
+			updateThread.start();
+		}
+	
+		
 		// TODO Auto-generated method stub
 		String queryString = request.getQueryString();
 		queryString = queryString.replaceAll("%20", " ");
@@ -103,8 +112,9 @@ public class LoginServlet extends HttpServlet {
 			//id = database.insertUser("guest","guest",1,address,""+lat,""+lng,1);
 			id = database.insertUser("guest","guest",1);
 			int userkey = iconweb.addUser("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue());
-			iconserver.showlocationtree();
+			//iconserver.showlocationtree();
 			dbtoicon.put(id, userkey);
+			userusagetime.put(id, System.currentTimeMillis());
 		}else{
 			if(!un.equals("null")&&!pw.equals("null")){
 				System.out.println("Verify "+un+" pw "+pw);
@@ -122,7 +132,7 @@ public class LoginServlet extends HttpServlet {
 						iconweb.removeUser("rigi-lab-03.cs.uvic.ca", key);
 						id=database.getUserID(un)+"";
 						int userkey = iconweb.addUser("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue());
-						iconserver.showlocationtree();
+						//iconserver.showlocationtree();
 						dbtoicon.put(id, userkey);
 					}
 				}else{
@@ -132,7 +142,7 @@ public class LoginServlet extends HttpServlet {
 				id="-1";
 			}
 		}
-		database.showTable("users");database.showTable("profiles");database.showTable("locations");
+		//database.showTable("users");database.showTable("profiles");database.showTable("locations");
 		response.getWriter().write(id);
 		response.getWriter().close();
 	}
