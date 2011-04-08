@@ -221,8 +221,8 @@ function send_audioSubmitted(){
 			  }
 			var url="SendAudioMessengerServlet";
 			url=url+"?logid="+userid;
-			url=url+"&latit="+latitude;
-			url=url+"&lngit="+longitude;
+			url=url+"&latit="+latlng.lat();
+			url=url+"&lngit="+latlng.lng();
 			url=url+"&radii="+radius;
 			url=url+"&msgky="+send_audio_key;
 			url=url+"&sid="+Math.random();

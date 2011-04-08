@@ -7,8 +7,8 @@ var username;
 var userpw;
 var regname;
 
-var latitude;
-var longitude;
+//var latitude;
+//var longitude;
 var radius;
 
 function register(un){
@@ -43,7 +43,7 @@ function registrationSubmitted(){
 }
 
 function fulllogin(un,pw){
-	login(userid,un,pw,document.yakform.latitude.value,document.yakform.longitude.value,document.yakform.tx_radius.value);
+	login(userid,un,pw,latlng.lat(),latlng.lng(),document.yakform.tx_radius.value);
 }
 
 function login(id,un,pw,lat,lng,rad){
@@ -54,10 +54,12 @@ function login(id,un,pw,lat,lng,rad){
 	  return;
 	  }
 	addHomeCircle(lat,lng,rad,"#FF0000");
-	username=un;latitude=lat;longitude=lng;radius=rad;
+	username=un;
+	//latitude=lat;longitude=lng;
+	radius=rad;
 	var url="LoginServlet";
-	url=url+"?latit="+lat;
-	url=url+"?logit="+lng;
+	url=url+"?latit="+latlng.lat();
+	url=url+"?logit="+latlng.lng();
 	url=url+"?logid="+id;
 	url=url+"?logun="+un;
 	url=url+"?logpw="+pw;
@@ -103,10 +105,10 @@ function loginComplete(){
 			if(username==null){
 				username="guest";
 				document.getElementById("login_name").innerHTML=username;
-				addHomeCircle(latitude,longitude,radius,"#777700");
+				addHomeCircle(latlng.lat(),latlng.lng(),radius,"#777700");
 			}else{
 				document.getElementById("login_name").innerHTML=username;
-				addHomeCircle(latitude,longitude,radius,"#00FF00");
+				addHomeCircle(latlng.lat(),latlng.lng(),radius,"#00FF00");
 			}
 		}else{
 			alert("Error Login in check username and password");
@@ -128,7 +130,7 @@ function mainChanged(){
 			textmessengerstarttimer();
 			audiomessengerstarttimer();
 			if(userid==null){
-				login(null,null,null,document.yakform.latitude.value,document.yakform.longitude.value,document.yakform.tx_radius.value);
+				login(null,null,null,latlng.lat(),latlng.lng(),document.yakform.tx_radius.value);
 			}else{
 				document.getElementById("login_id").innerHTML=userid;
 			}

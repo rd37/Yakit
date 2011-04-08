@@ -22,8 +22,8 @@ function sendchar(e) {
 	keychar = String.fromCharCode(keynum);
     //alert("key pressed "+keychar+" keynum "+keynum);
 	if (keynum == 13) {         
-		latitude = document.yakform.latitude.value;
-		longitude = document.yakform.longitude.value;
+		//latitude = document.yakform.latitude.value;
+		//longitude = document.yakform.longitude.value;
 		radius = document.yakform.tx_radius.value;
 		
 		var message=document.yakform.textinput.value;
@@ -36,8 +36,8 @@ function sendchar(e) {
 		  }
 		var url="TextMessengerServlet";
 		url=url+"?logid="+userid;
-		url=url+"?latit="+latitude;
-		url=url+"?lngit="+longitude;
+		url=url+"?latit="+latlng.lat();
+		url=url+"?lngit="+latlng.lng();
 		url=url+"?radii="+radius;
 		url=url+"?opera=sendmessage";
 		url=url+"?messg="+message;
@@ -76,8 +76,8 @@ function textmessengertimer(){
 }
 
 function sendRequestForMessages(){
-	latitude = document.yakform.latitude.value;
-	longitude = document.yakform.longitude.value;
+	//latitude = document.yakform.latitude.value;
+	//longitude = document.yakform.longitude.value;
 	radius = document.yakform.tx_radius.value;
 	
 	var message="yak";
@@ -90,8 +90,8 @@ function sendRequestForMessages(){
 	  }
 	var url="TextMessengerServlet";
 	url=url+"?logid="+userid;
-	url=url+"?latit="+latitude;
-	url=url+"?lngit="+longitude;
+	url=url+"?latit="+latlng.lat();
+	url=url+"?lngit="+latlng.lng();
 	url=url+"?radii="+radius;
 	url=url+"?opera=getmessages";
 	url=url+"?messg="+message;

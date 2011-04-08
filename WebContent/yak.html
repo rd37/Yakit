@@ -22,13 +22,14 @@
 	<table>
 	<tr>
 		<td><table><tr><td>TX Radius<select name="tx_radius">
+						   <option value="10">10m</option>
                            <option value="30">30m</option>
                            <option value="60">60m</option>
-                           <option value="100" selected="selected">100m</option>
-                           <option value="200">200m</option>
+                           <option value="100">100m</option>
+                           <option value="200" selected="selected" >200m</option>
                            <option value="400">400m</option>
-                           </select></td></tr><tr><td>Lat:<input type="text" name="latitude" value="48.463"/></td></tr>
-                           <tr><td>Lng:<input type="text" name="longitude" value="-123.313" /></td></tr>
+                           </select></td></tr>
+                           
                            <tr><td><div id="mapholder" class="mapspace"></div></td></tr></table></td>
 		<td><table><tr><td>Text or <input type="button" value="push to YaK" onmousedown="collectaudio()" onmouseup="stopcollectaudio()" ></td></tr><tr><td><textarea name="textinput" rows="2" cols="15" onkeypress="return sendchar(event)"></textarea></td></tr><tr><td><textarea readonly="readonly" name="textoutput" rows="7" cols="15"></textarea></td></tr></table></td>
 	</tr>

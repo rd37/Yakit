@@ -6,8 +6,6 @@ var timer;
 var timerstarted;
 var timerdeployed;
 var peers=[];
-var maplat=48.463;
-var maplng=-123.313;
 var latlng;
 var chg=0;
 var covHttpReq;
@@ -20,7 +18,7 @@ var positionselected=0;
 function initialize() {     
 	//alert("init map");
 	gmapselfupdater();textmessengertimer();send_audiomessengertimer();rcv_audiomessengertimer();
-	latlng = new google.maps.LatLng(maplat, maplng);     
+	latlng = new google.maps.LatLng(48.4633, -123.3133);     
 	mapOptions = {       zoom: 16,       center: latlng,       mapTypeId: google.maps.MapTypeId.ROADMAP     };     
 	map = new google.maps.Map(document.getElementById("map_canvas"),         mapOptions); 
 	
@@ -39,10 +37,10 @@ function initialize() {
 		   //alert(" now move cirlce");
 		   document.yakform.latitude.value=latlng.lat();
 		   latitude=latlng.lat();
-		   maplat=latlng.lat();
+		   //maplat=latlng.lat();
 		   document.yakform.longitude.value=latlng.lng();
 		   longitude=latlng.lng();
-		   maplng=latlng.lng();
+		   //maplng=latlng.lng();
 		   circle.setCenter(latlng);innercircle.setCenter(latlng);
 		}
 	});
@@ -71,10 +69,10 @@ function addHomeCircle(lat,long,rad,color){
 			   //alert(" now move cirlce");
 			   document.yakform.latitude.value=latlng.lat();
 			   latitude=latlng.lat();
-			   maplat=latlng.lat();
+			   //maplat=latlng.lat();
 			   document.yakform.longitude.value=latlng.lng();
 			   longitude=latlng.lng();
-			   maplng=latlng.lng();
+			   //maplng=latlng.lng();
 			   circle.setCenter(latlng);innercircle.setCenter(latlng);
 		   }else{
 			   mousefirstlatlng=event.latLng;
@@ -137,8 +135,8 @@ function gmapselfupdater(){
 		var url="iConServlet";
 		//alert("Request coverage for id:"+userid+" lt:"+latitude+" lng:"+longitude+" radius:"+radius);
 		url=url+"?logid="+userid;
-		url=url+"?latit="+latitude;
-		url=url+"?lngit="+longitude;
+		url=url+"?latit="+latlng.lat();
+		url=url+"?lngit="+latlng.lng();
 		url=url+"?radii="+radius;
 		url=url+"?opera=getcover";
 		url=url+"&sid="+Math.random();
@@ -158,7 +156,7 @@ function coverageRequestComplete(){
 }
 
 function gmapupdate(points){
-	updateHomeCircle(latitude = document.yakform.latitude.value,longitude = document.yakform.longitude.value,radius = document.yakform.tx_radius.value);
+	updateHomeCircle(latlng.lat(),latlng.lng(),radius = document.yakform.tx_radius.value);
 	
 	var splitpoints=points.split(" ");
 	var users = splitpoints.length;
