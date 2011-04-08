@@ -100,7 +100,10 @@ public class iConServlet extends HttpServlet {
 		/*
 		 * Update my position
 		 */
-		
+		if(dbtoicon==null){
+			System.out.println("System not ready ");
+			return;
+		}
 		int userkey=dbtoicon.get(id);
 		//System.out.println("attempt to move user "+userkey+" to "+lat+" "+lng);
 		iconweb.moveUser("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey);
