@@ -52,13 +52,13 @@ public class iConServlet extends HttpServlet {
     	int indexEnd = query.indexOf("?opera=");
     	return query.substring( (indexStart+7), indexEnd) ;
     }
-    /*
+    
     private String getOperation(String query){
     	int indexStart = query.indexOf("?opera=");
     	int indexEnd = query.indexOf("&sid=");
     	return query.substring( (indexStart+7), indexEnd) ;
     }
-    */
+    
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -90,7 +90,7 @@ public class iConServlet extends HttpServlet {
 		}
 		
 		HashMap<String,Long> userusagetime = (HashMap<String, Long>) this.getServletContext().getAttribute("userusagetime");
-		if(dbtoicon==null){
+		if(userusagetime==null){
 			this.getServletContext().setAttribute("userusagetime", userusagetime = new HashMap<String,Long>() );
 			UserUpdate userupdate = new UserUpdate(userusagetime,iconweb,dbtoicon,YaKitDerbyDB.getInstance());
 			Thread updateThread = new Thread(userupdate);
@@ -106,7 +106,7 @@ public class iConServlet extends HttpServlet {
 		String lat = this.getLatitude(queryString);
 		String lng = this.getLongitude(queryString);
 		String rad = getRadius(queryString);
-		//String op = getOperation(queryString);
+		String op = getOperation(queryString);
 		String address = request.getRemoteAddr();
 		
 		userusagetime.put(id, System.currentTimeMillis());
@@ -117,6 +117,7 @@ public class iConServlet extends HttpServlet {
 			System.out.println("System not ready ");
 			return;
 		}
+		System.out.println("get user key with id "+id);
 		int userkey=dbtoicon.get(id);
 		//System.out.println("attempt to move user "+userkey+" to "+lat+" "+lng);
 		iconweb.moveUser("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey);
@@ -129,6 +130,11 @@ public class iConServlet extends HttpServlet {
 		String coverres = iconweb.getCoverage("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey, iconserver.metersToDegree((new Double(rad)).doubleValue())  );
 		//System.out.println("Cover keys are " + coverres);
 		String responsePositions = new String();
+		System.out.println("op "+op+" id id "+id);
+		if(op.equals("getcoverwithid")){
+			System.out.println("response with a getcoverwithid "+id);
+			responsePositions+=id+" ";
+		}
 		StringTokenizer st = new StringTokenizer(coverres);
 		while(st.hasMoreTokens()){
 			int key = (new Integer(st.nextToken()));

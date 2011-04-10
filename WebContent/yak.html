@@ -29,7 +29,11 @@
                            <option value="200" selected="selected" >200m</option>
                            <option value="400">400m</option>
                            </select></td></tr>
-                           
+                           <tr>
+                           <td><img onclick="adddevice('txrx')" alt="transmitter and reciever" border=1 align="left" width="30px" height="30px" src="images/transmiterreciever.gif" />
+                           <img alt="transmitter" border=1 align="left" width="30px" height="30px" src="images/transmitter.gif" />
+                           <img alt="receiver" border=1 align="left" width="30px" height="30px" src="images/receiver.gif" /></td>
+                           </tr>
                            <tr><td><div id="mapholder" class="mapspace"></div></td></tr></table></td>
 		<td><table><tr><td>Text or <input type="button" value="push to YaK" onmousedown="collectaudio()" onmouseup="stopcollectaudio()" ></td></tr><tr><td><textarea name="textinput" rows="2" cols="15" onkeypress="return sendchar(event)"></textarea></td></tr><tr><td><textarea readonly="readonly" name="textoutput" rows="7" cols="15"></textarea></td></tr></table></td>
 	</tr>
