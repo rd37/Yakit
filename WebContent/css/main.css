@@ -9,6 +9,6 @@ table.signon {font-size:10px;color:purple;}
 input.signon {font-size:8px;color:blue;text-align:left;width:80px;}
 button.signon {font-size:8px;color:green;text-align:center;width:85px;}
 div.topnav {font-size:14px ; text-align:left ; color:blue;align:left}
-div.mapspace {width:200px;height:200px;}
-div.gmap {width:200px;height:200px;left:10px;top:10px;position:absolute;} 
+div.mapspace {width:250px;height:250px;}
+div.gmap {width:250px;height:250px;left:10px;top:10px;position:absolute;} 
 

@@ -36,7 +36,7 @@ function adddevice(type){
 		objectinfo["id"]= (username+"-"+objectindex);//is temperary till server returns login id
 		objectinfo["lat"]= latlng.lat()+"";
 		objectinfo["lng"]= latlng.lng()+"";
-		objectinfo["rad"]= 60;
+		objectinfo["rad"]= 30;
 		objectinfo["isclicked"]= "false";
 		objectinfo["newposition"]= null;
 		
