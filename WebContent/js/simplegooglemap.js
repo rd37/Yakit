@@ -1,4 +1,4 @@
-var userobjects = new Array();//includes the user - later do this
+var userobjects = new Array();//keeps a list of user objects which are really arrays of user info.
 var objectinfo=null;//has info on a device object
 var objectindex=0;
 var map;
@@ -12,10 +12,11 @@ var peers=[];
 var latlng;
 var chg=0;
 var covHttpReq;
-var idobjectarray = new Array();
-var httparray = new Array();
+var idobjectarray = new Array();//keeps a list of arrays each array is indexed by userid arrays have coverage coords
+var httparray = new Array();//keeps a list of http request made by sensors requesting coverage
 
-var objectidname = new Array();
+var objectidname = new Array();//store idnames used to index userobjects
+var nameindex=0;
 
 //support user move and upate lat and long of their position
 var mousefirstlatlng=null;
@@ -231,12 +232,14 @@ function objectlogin(id,un,pw,lat,lng,rad){
 }
 
 function updateUserObjects(){
-	var tmparray=[];
-	var object = userobjects.pop();
+	//var tmparray=[];
+	//var object = userobjects.pop();
+	var objectIndex=0;
+	var object = userobjects[objectidname[objectIndex]];
 	//var tmpid;
 	var index=0;
 	while(object){
-		tmparray.push(object);
+		//tmparray.push(object);
 	    if(httparray[index]!=null){ //waiting oon http call so break out of 
 	    	alert(object["id"]+" request for coverage still waiting for response ");
 	    	//httparray[object["id"]]=null;
@@ -295,14 +298,16 @@ function updateUserObjects(){
 			objHttpReq.send(null);
 			
 	    }
-		object = userobjects.pop();
+		//object = userobjects.pop();
+	    objectIndex+=1;
+	    object = userobjects[objectidname[objectIndex]];
 	}
 	
-	object = tmparray.pop();
+	/*object = tmparray.pop();
 	while(object){
 		userobjects.push(object);
 		object = tmparray.pop();
-	}
+	}*/
 }
 
 
@@ -313,8 +318,12 @@ function objectLoginComplete(){
 			//userid=tmpid;
 			objectinfo["id"]= (""+tmpid);
 			idobjectarray[""+tmpid]=new Array();
-			userobjects.push(objectinfo);
+			//userobjects.push(objectinfo);
+			userobjects[""+tmpid]=(objectinfo);
 			objectindex+=1;
+			objectidname[nameindex]=(""+tmpid);
+			//alert("add new sensor at pos "+nameindex+" id is "+tmpid);
+			nameindex+=1;
 			var lat=objectinfo["lat"];
 			var lng=objectinfo["lng"];
 			var rad=objectinfo["rad"];
@@ -328,7 +337,7 @@ function objectLoginComplete(){
 		}
 	}
 }
-
+/*
 function updateobjectmap(){
 	var tmparray=[];
 	var object = userobjects.pop();
@@ -346,4 +355,4 @@ function updateobjectmap(){
 		object = tmparray.pop();
 	}
 }
-
+*/

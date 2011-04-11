@@ -117,7 +117,7 @@ public class iConServlet extends HttpServlet {
 			System.out.println("System not ready ");
 			return;
 		}
-		System.out.println("get user key with id "+id);
+		//System.out.println("get user key with id "+id);
 		int userkey=dbtoicon.get(id);
 		//System.out.println("attempt to move user "+userkey+" to "+lat+" "+lng);
 		iconweb.moveUser("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey);
@@ -130,9 +130,9 @@ public class iConServlet extends HttpServlet {
 		String coverres = iconweb.getCoverage("rigi-lab-03.cs.uvic.ca", address, (new Double(lat)).doubleValue(), (new Double(lng)).doubleValue(), userkey, iconserver.metersToDegree((new Double(rad)).doubleValue())  );
 		//System.out.println("Cover keys are " + coverres);
 		String responsePositions = new String();
-		System.out.println("op "+op+" id id "+id);
+		//System.out.println("op "+op+" id id "+id);
 		if(op.equals("getcoverwithid")){
-			System.out.println("response with a getcoverwithid "+id);
+			//System.out.println("response with a getcoverwithid "+id);
 			responsePositions+=id+" ";
 		}
 		StringTokenizer st = new StringTokenizer(coverres);

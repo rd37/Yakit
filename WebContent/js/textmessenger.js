@@ -2,6 +2,7 @@ var msgHttpReg;
 var msg2HttpReg;
 var texttimer;
 var buzy=0;
+var httpTextReq = new Array();
 
 function sendchar(e) {  
 	//alert("key press");
@@ -43,19 +44,41 @@ function sendchar(e) {
 		url=url+"?messg="+message;
 		url=url+"&sid="+Math.random();
 		//alert(url);
-		msgHttpReq.onreadystatechange=msgSubmitted;
+		msgHttpReq.onreadystatechange=function(){};
 		msgHttpReq.open("GET",url,true);
 		msgHttpReq.send(null);
+		updateobjectsmessagesend(message);
 	}
 }
 
-function msgSubmitted(){
-	if(msgHttpReq.readyState==4){
-		//alert(""+msgHttpReq.responseText);
-		//var txt = document.yakform.textoutput.value;
-		//document.yakform.textoutput.value=msgHttpReq.responseText+"\n"+txt;
+function updateobjectsmessagesend(msg){
+	var index=0;
+	var idsensor = objectidname[index];
+	while(idsensor){
+		var object = userobjects[idsensor];
+		var objSendHttpReq=GetXmlHttpObject();
+		if (objSendHttpReq==null)
+		  {
+		  alert ("Your browser does not support AJAX!");
+		  return;
+		  }
+		var url="TextMessengerServlet";
+		url=url+"?logid="+object["id"];
+		url=url+"?latit="+object["lat"];
+		url=url+"?lngit="+object["lng"];
+		url=url+"?radii="+object["rad"];
+		url=url+"?opera=sendmessage";
+		url=url+"?messg="+msg;
+		url=url+"&sid="+Math.random();
+		//alert(url);
+		objSendHttpReq.onreadystatechange=function(){};
+		objSendHttpReq.open("GET",url,true);
+		objSendHttpReq.send(null);
+		index+=1;
+		idsensor = objectidname[index];
 	}
 }
+
 
 function textmessengerstarttimer(){
 	if(timerstarted==0){
@@ -100,6 +123,7 @@ function sendRequestForMessages(){
 	msg2HttpReq.onreadystatechange=getMsgSubmitted;
 	msg2HttpReq.open("GET",url,true);
 	msg2HttpReq.send(null);
+	updateobjectsmessagercv(message);
 }
 
 function getMsgSubmitted(){
@@ -111,3 +135,48 @@ function getMsgSubmitted(){
 		buzy=0;
 	}
 }
+
+function updateobjectsmessagercv(msg){
+	var index=0;
+	var idsensor = objectidname[index];
+	var reqindex=0;
+	while(idsensor){
+		var object = userobjects[idsensor];
+		var msgrcvHttpReq=GetXmlHttpObject();
+		if (msgrcvHttpReq==null)
+		  {
+		  alert ("Your browser does not support AJAX!");
+		  return;
+		  }
+		if(httpTextReq[reqindex]==null)
+			httpTextReq[reqindex]=msgrcvHttpReq;
+		reqindex+=1;
+		var url="TextMessengerServlet";
+		url=url+"?logid="+object["id"];
+		url=url+"?latit="+object["lat"];
+		url=url+"?lngit="+object["lng"];
+		url=url+"?radii="+object["rad"];
+		url=url+"?opera=getmessages";
+		url=url+"?messg="+msg;
+		url=url+"&sid="+Math.random();
+		//alert(url);
+		msgrcvHttpReq.onreadystatechange=function(){
+			var tmpindex=0;
+			while(httpTextReq[tmpindex]){
+				if(httpTextReq[tmpindex].readyState==4){
+					var txt = document.yakform.textoutput.value;
+					if(httpTextReq[tmpindex].responseText!=null && httpTextReq[tmpindex].responseText!="")
+					document.yakform.textoutput.value=httpTextReq[tmpindex].responseText+"\n"+txt;
+					httpTextReq[tmpindex]=null;
+				}
+				tmpindex+=1;
+			}
+		};
+		msgrcvHttpReq.open("GET",url,true);
+		msgrcvHttpReq.send(null);
+		
+		index+=1;
+		idsensor = objectidname[index];
+	}
+}
+

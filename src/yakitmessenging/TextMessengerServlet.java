@@ -147,7 +147,7 @@ public class TextMessengerServlet extends HttpServlet {
 			//iconweb.addMessageKey("rigi-lab-03.cs.uvic.ca",userkey,slfmsgkey,Message.TEXT);
 			returnmessage="message send to "+msgcount+" users";
 			//System.out.println(returnmessage);
-		}else if(op.equals("getmessages")){
+		}else if(op.equals("getmessages")  ){
 			//hopefully one at a time
 			/*
 			 *  * 4. if getting messages
