@@ -129,6 +129,8 @@ function mainChanged(){
 			gmapstarttimer();
 			textmessengerstarttimer();
 			audiomessengerstarttimer();
+			//alert("start yakit");
+			initializeGPS();
 			if(userid==null){
 				login(null,null,null,latlng.lat(),latlng.lng(),document.yakform.tx_radius.value);
 			}else{

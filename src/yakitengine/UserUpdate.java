@@ -32,17 +32,25 @@ public class UserUpdate implements Runnable{
 					Long userUpdate = userlist.get(key);
 					if((userUpdate+timeoutLimit)<System.currentTimeMillis() ){
 						System.out.println("A user has timed out. so remove from system "+key);
-						database.removeUserID(key);
-						int dkey = dbtoicon.remove(key);
-						iconweb.removeUser("rigi-lab-03.cs.uvic.ca", dkey);
-						removedUsers.add(key);
+						try{
+							Integer dkey = dbtoicon.remove(key);
+							if(dkey!=null)
+								iconweb.removeUser("rigi-lab-03.cs.uvic.ca", dkey);
+							removedUsers.add(key);
+						
+							database.removeUserID(key);
+						}catch(Exception ee){
+							System.out.println("Error deleting from db or web remove"+key);
+							ee.printStackTrace();
+						}
 					}
 				}
 				for(int i=0;i<removedUsers.size();i++){
 					userlist.remove(removedUsers.get(i));
 				}
 			}catch(Exception e){
-				System.out.println("Self timer error deleting users");
+				System.out.println("Self timer error deleting users "+e);
+				e.printStackTrace();
 			}
 		}
 	}
